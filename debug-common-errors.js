@@ -24,10 +24,10 @@ Think about which debugging methods you found most useful and how you might appl
 // Description:
 // This program is intended to display a simple prompt in the console but fails to run.
 
-console.log("Welcome to the bootcamp
+console.log("Welcome to the bootcamp");
 
 // What’s Wrong?
-
+// a closing quotation mark and parenthesis are missing
 
 // Program B
 // Description:
@@ -35,12 +35,17 @@ console.log("Welcome to the bootcamp
 
 let numbers = [2, 4, "eight"];
 for (let i = 0; i < numbers.length; i++) {
-  let doubled = numbers[i] * 2;
-  console.log(doubled);
+  if (typeof numbers[i] === "number") {
+    let doubled = numbers[i] * 2;
+    console.log(doubled);
+  } else {
+    console.log(`${i}th element is not a number: ${numbers[i]}`);
+  }
 }
 
 // What’s Wrong?
-
+// "eight" is a string, not a number, JavaScript can't multiply it by 2 (it results in NaN instead).
+// To fix it we can either replace "eight" with 8, or check the type of an element before multiplying and skip it if it's not a number.  
 
 
 // Program C (Logic Error)
@@ -51,12 +56,14 @@ function isPrime(num) {
   if (num < 2) return false;
   for (let i = 2; i < num; i++) {
     if (num % i === 0) {
-      return true;  // Supposed to indicate num is NOT prime
+      return false;  // Supposed to indicate num is NOT prime
     }
   }
-  return false; // Supposed to indicate num IS prime
+  return true; // Supposed to indicate num IS prime
 }
 
 console.log(isPrime(7)); // Expected true but gets false
 
 // What’s Wrong?
+// It returns the opposite result. If a number divisible by any other number then it is not prime => the function should return false. 
+// If no other dividers are found the function should return true.
